@@ -5,8 +5,9 @@ import tkinter as tk
 from logic import KanbanManager
 
 class KanbanApp:
+    #Modularidade: Esta classe é dedicada apenas à interface gráfica, isolando-a da lógica de dados (que está no logic.py)
     def __init__(self, root):
-        self.manager = KanbanManager()
+        self.manager = KanbanManager() # ENCAPSULAMENTO: usa a lógica do logic.py
         self.root = root
         self.root.title("Kanban Board")
         self.style = ttk.Style("darkly")

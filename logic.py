@@ -3,6 +3,7 @@ import redis
 import os
 
 class KanbanManager:
+    # Modularidade: Esta classe é um módulo independente responsável apenas pela lógica de manipulação de tarefas.
 
     def __init__(self):
         self.colunas = ["a_comecar", "em_progresso", "concluida"]
@@ -21,12 +22,14 @@ class KanbanManager:
         return tarefas
     
     def salvar_dados(self):
+        # Separação de Interesses: Este método isola a responsabilidade de salvar os dados no Redis e no JSON
         for coluna in self.colunas:
             self.redis.set(coluna, json.dumps(self.tarefas[coluna], ensure_ascii=False))
             self.salvar_em_arquivo_json()
 
 
     def adicionar_tarefa(self, dados):
+        #Encapsulamento: O acesso direto à estrutura de dados 'tarefas' é feito apenas por métodos da classe.
         self.tarefas["a_comecar"].append(dados)
         self.salvar_dados()
 
